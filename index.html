@@ -51,6 +51,28 @@ osm.addTo(map)
 
    var secoundMarker = L.marker([-3.3189, 114.6048],{icon: myIcon, draggable : true});
 
+   // circel
+   var circle = L.circle([-3.3189, 114.6048], {
+    color : "red",
+    fillColor : "#f03",
+    fillOpacity : 0.5,
+    radius : 500
+   }).addTo(map)
+
+   circle.bindPopup("ini adalah area circel").openPopup();
+
+   var polygon = L.polygon([
+    [-3.3190, 114.5944],
+    [-3.3205, 114.5980],
+    [-3.3170, 114.5995]
+    ], {
+        color: 'blue',
+        fillColor: '#0af',
+        fillOpacity: 0.5
+    }).addTo(map);
+
+    polygon.bindPopup("Ini adalah area polygon").openPopup();
+
    console.log(singleMarker.toGeoJSON())
 
    //layer controller
