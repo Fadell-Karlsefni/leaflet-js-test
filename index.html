@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- leaflet css -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+</body>
+</html>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<script>
+    // inisialisasi map
+    var map = L.map('map').setView([-3.3186, 114.5944], 13);
+
+    // osm layer
+    var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+});
+
+osm.addTo(map)
+    // marker penanda dan mengganti icon serta menampilkan popup
+    var myIcon = L.icon({
+    iconUrl: 'img/panda.png',
+    iconSize: [40, 40],
+});
+    var stamen = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', {
+        attribution: 'Map tiles by Stamen Design, under CC BY 3.0'
+    });
+
+   var singleMarker = L.marker([-3.3186, 114.5944],{icon: myIcon, draggable : true});
+   var popup = singleMarker.bindPopup(" Ini adalah Lokasi Daerah saya : " + singleMarker.getLatLng()).openPopup()
+   popup.addTo(map)
+
+   var secoundMarker = L.marker([-3.3189, 114.6048],{icon: myIcon, draggable : true});
+
+   console.log(singleMarker.toGeoJSON())
+
+   //layer controller
+   var baseLayers = {
+    "Stamen Toner": stamen,
+    "OpenStreetMap": osm
+};
+
+    var overlays = {
+        "Marker Saya": singleMarker,
+        "secoundMarker" : secoundMarker
+};
+
+    map.removeLayer(osm)
+
+    L.control.layers(baseLayers, overlays, {collapsed : false}).addTo(map);
+
+
+</script>
