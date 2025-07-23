@@ -46,10 +46,12 @@ osm.addTo(map)
     });
 
    var singleMarker = L.marker([-3.3186, 114.5944],{icon: myIcon, draggable : true});
+   var secoundMarker = L.marker([-3.3189, 114.6048],{icon: myIcon, draggable : true});
+   var thirdMarker = L.marker([-3.3190, 114.5944],{icon : myIcon,draggable : true});
    var popup = singleMarker.bindPopup(" Ini adalah Lokasi Daerah saya : " + singleMarker.getLatLng()).openPopup()
    popup.addTo(map)
 
-   var secoundMarker = L.marker([-3.3189, 114.6048],{icon: myIcon, draggable : true});
+   
 
    // circel
    var circle = L.circle([-3.3189, 114.6048], {
@@ -59,7 +61,7 @@ osm.addTo(map)
     radius : 500
    }).addTo(map)
 
-   circle.bindPopup("ini adalah area circel").openPopup();
+   secoundMarker.bindPopup("ini adalah area circel" + secoundMarker.getLatLng()).openPopup();
 
    var polygon = L.polygon([
     [-3.3190, 114.5944],
@@ -83,7 +85,8 @@ osm.addTo(map)
 
     var overlays = {
         "Marker Saya": singleMarker,
-        "secoundMarker" : secoundMarker
+        "secoundMarker" : secoundMarker,
+        "thirdMarker" : thirdMarker
 };
 
     map.removeLayer(osm)
